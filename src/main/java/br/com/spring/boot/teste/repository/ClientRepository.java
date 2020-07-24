@@ -1,13 +1,10 @@
 package br.com.spring.boot.teste.repository;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.com.spring.boot.teste.domain.Planeta;
+import br.com.spring.boot.teste.domain.Client;
 
-public interface PlanetaRepository extends MongoRepository<Planeta, String> {
+public interface ClientRepository extends MongoRepository<Client, String> {
 
-	List<Planeta> findByNome(String nome);
 
 }

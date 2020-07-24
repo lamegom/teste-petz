@@ -1,80 +1,56 @@
 package br.com.spring.boot.teste.service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.spring.boot.teste.domain.Planeta;
-import br.com.spring.boot.teste.domain.Result;
-import br.com.spring.boot.teste.domain.StarWars;
-import br.com.spring.boot.teste.repository.PlanetaRepository;
+import br.com.spring.boot.teste.domain.Client;
+import br.com.spring.boot.teste.repository.ClientRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PlanetaService {
+public class ClientService {
 	
 	@Autowired
-	private PlanetaRepository planetaRepository;
+	private ClientRepository clientRepository;
 	
-	@Autowired
-	private StarWarsService starWarsService;
 	
-	public Planeta savePlaneta(Planeta planeta) {
+	public Client saveClient(Client client) {
 		
-		StarWars starwars = starWarsService.getStarWarsByName(planeta.getNome());
 		
-		if (Objects.isNull(starwars)) {
-			log.error("Movies quantity not found");
-			planeta.setQtdeFilmes(0);
-			
-		} else {
-		
-			planeta.setQtdeFilmes(starwars.getResults().get(0).getFilms().size());
-		}
-		
-		return planetaRepository.save(planeta);
+		return clientRepository.save(client);
 		
 
 		
 	}
 	
-	public List<Planeta> getPlanetas(){
+	public List<Client> getClients(){
 		
-		return planetaRepository.findAll();
+		return clientRepository.findAll();
 	}
-	
-	public List<Result> getPlanetasStarWars(){
-		
-		return starWarsService.getStarWars();
-	}
-	
-	public List<Planeta> getPlanetaByNome(String nome){
-		
-		return planetaRepository.findByNome(nome);
-	}
-	
-	public Planeta getPlanetaById(String id){
-		
-		Optional<Planeta> dbPlaneta = planetaRepository.findById(id);
-		
-		Planeta existingPlaneta = null;
 
-		if(dbPlaneta.isPresent()) {
-			existingPlaneta = dbPlaneta.get();
+	
+	public Client getClientById(String id){
+		
+		Optional<Client> dbClient = clientRepository.findById(id);
+		
+		Client existingClient = null;
+
+		if(dbClient.isPresent()) {
+			existingClient = dbClient.get();
 
 		}
 
 		
-		return existingPlaneta;
+		return existingClient;
 	}
 	
-	public void removePlanetaById(String id) throws Exception {
+	public void removeClientById(String id) throws Exception {
 			
-		planetaRepository.deleteById(id);
+		clientRepository.deleteById(id);
 
 	}
 	

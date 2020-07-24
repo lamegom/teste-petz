@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class StarWars  implements Serializable{
+public class Client  implements Serializable{
 	
-	  private float count;
-	  private String next = null;
-	  private String previous = null;
-	  @JsonProperty("results")
+	  private String id;
+	  private String name = null;
+	  private String cpf = null;
+	  @JsonProperty("pets")
 	  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-	  List<Result> results;
+	  List<Pet> pets;
 
 }

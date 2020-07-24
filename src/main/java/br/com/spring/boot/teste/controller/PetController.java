@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.spring.boot.teste.domain.Client;
-import br.com.spring.boot.teste.service.ClientService;
+import br.com.spring.boot.teste.domain.Pet;
+import br.com.spring.boot.teste.service.PetService;
 
 @RequestMapping("/api/v1")
 @RestController
-public class ClientController {
+public class PetController {
 
 
 
 		@Autowired
-		ClientService clientService;
+		PetService petService;
 
-		@PostMapping("/clients")
-		public ResponseEntity<?> createClient(@RequestBody Client request) throws IOException {
+		@PostMapping("/pets")
+		public ResponseEntity<?> createPet(@RequestBody Pet request) throws IOException {
 			try {
-				final Client response = clientService.saveClient(request);
+				final Pet response = petService.savePet(request);
 				final URI location = fromCurrentRequest().path("/{id}").buildAndExpand(response.getId()).toUri();
 				return ResponseEntity.created(location).body(response);
 
@@ -40,10 +40,10 @@ public class ClientController {
 			}
 		}
 		
-		@GetMapping("/clients")
-		public ResponseEntity<?> getClients() throws IOException {
+		@GetMapping("/pets")
+		public ResponseEntity<?> getPets() throws IOException {
 			try {
-				final List<Client> response = clientService.getClients();
+				final List<Pet> response = petService.getPets();
 
 				return ResponseEntity.ok(response);
 
@@ -53,10 +53,10 @@ public class ClientController {
 			}
 		}
 		
-		@GetMapping("/clients/id/{id}")
-		public ResponseEntity<?> getClientsById(@PathVariable("id") String id) throws IOException {
+		@GetMapping("/pets/id/{id}")
+		public ResponseEntity<?> getPetsById(@PathVariable("id") String id) throws IOException {
 			try {
-				final Client response = clientService.getClientById(id);
+				final Pet response = petService.getPetById(id);
 
 				return ResponseEntity.ok(response);
 
@@ -66,10 +66,10 @@ public class ClientController {
 			}
 		}
 		
-		@PostMapping("/clients/{id}")
-		public ResponseEntity<?> removeClientsById(@PathVariable("id") String id) throws IOException {
+		@PostMapping("/pets/{id}")
+		public ResponseEntity<?> removePetsById(@PathVariable("id") String id) throws IOException {
 			try {
-				clientService.removeClientById(id);
+				petService.removePetById(id);
 
 				return ResponseEntity.accepted().build();
 
